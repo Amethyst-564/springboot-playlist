@@ -8,23 +8,33 @@ import pers.opappo.playlist.enums.ResultEnum;
  */
 public class ResultVOUtil {
 
-    public static ResultVO success(Object object) {
-        ResultVO resultVO = new ResultVO();
-        resultVO.setData(object);
-        resultVO.setCode(ResultEnum.SUCCESS.getCode());
-        resultVO.setMsg(ResultEnum.SUCCESS.getMessage());
 
-        return resultVO;
-    }
-
-    public static ResultVO success() {
-        return success("");
-    }
-
+    /**
+     * 带前缀的成功
+     *
+     * @param pre
+     * @return
+     */
     public static ResultVO success(String pre) {
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(ResultEnum.SUCCESS.getCode());
         resultVO.setMsg(pre + ResultEnum.SUCCESS.getMessage());
+
+        return resultVO;
+    }
+
+    /**
+     * 带前缀和data的成功
+     *
+     * @param pre
+     * @param object
+     * @return
+     */
+    public static ResultVO success(String pre, Object object) {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setCode(ResultEnum.SUCCESS.getCode());
+        resultVO.setMsg(pre + ResultEnum.SUCCESS.getMessage());
+        resultVO.setData(object);
 
         return resultVO;
     }

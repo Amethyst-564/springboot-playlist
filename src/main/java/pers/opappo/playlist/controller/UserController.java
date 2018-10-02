@@ -12,6 +12,7 @@ import pers.opappo.playlist.enums.ResultEnum;
 import pers.opappo.playlist.service.UserInfoService;
 import pers.opappo.playlist.utils.ResultVOUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,7 +33,9 @@ public class UserController {
         UserInfo userInfo = userInfoService.findUserInfoByUsername(data.get("username"));
         try {
             if (userInfo.getPassword().equals(data.get("password"))) {
-                return ResultVOUtil.success("登陆");
+                Map<String, Integer> userObj = new HashMap<>();
+                userObj.put("user_id", userInfo.getUserId());
+                return ResultVOUtil.success("登陆", userObj);
 
             } else {
                 return ResultVOUtil.error(ResultEnum.PASSWORD_INCORRECT);

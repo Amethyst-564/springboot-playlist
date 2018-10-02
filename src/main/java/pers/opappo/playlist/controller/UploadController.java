@@ -19,7 +19,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/file")
 public class UploadController {
-
     @PostMapping("/upone")
     public ResultVO uploadOne(@RequestParam("customFile") MultipartFile file) throws IOException {
 
