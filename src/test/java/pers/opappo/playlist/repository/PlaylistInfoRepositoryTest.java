@@ -34,8 +34,8 @@ public class PlaylistInfoRepositoryTest {
 
     @Test
     public void findByUserId() {
-        List<PlaylistInfo> playlistInfo = repository.findByUserId(1);
-        Assert.assertEquals(2, playlistInfo.size());
+        List<PlaylistInfo> playlistInfo = repository.findByUserId(10);
+        Assert.assertEquals(1, playlistInfo.size());
 
 
     }

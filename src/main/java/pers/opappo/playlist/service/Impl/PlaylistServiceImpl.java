@@ -6,6 +6,8 @@ import pers.opappo.playlist.dataobject.PlaylistInfo;
 import pers.opappo.playlist.repository.PlaylistInfoRepository;
 import pers.opappo.playlist.service.PlaylistService;
 
+import java.util.List;
+
 /**
  * Created by minghli on 2018/9/30.
  */
@@ -18,5 +20,11 @@ public class PlaylistServiceImpl implements PlaylistService {
     @Override
     public PlaylistInfo save(PlaylistInfo playlistInfo) {
         return repository.save(playlistInfo);
+    }
+
+    @Override
+    public List<PlaylistInfo> findByUserId(Integer userId) {
+
+        return repository.findByUserId(userId);
     }
 }

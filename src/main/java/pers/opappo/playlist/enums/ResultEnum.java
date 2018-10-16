@@ -11,7 +11,8 @@ public enum ResultEnum {
     USER_IS_EXISTED(1003, "用户名已存在"),
     UPLOAD_FAILED(1004, "上传失败"),
     PLAYLIST_SAVE_FAILED(1005, "歌单保存失败"),
-
+    USER_STATUS_ERROR(1006, "用户状态异常"),
+    UNEXPECTED_ERROR(5000, "未知错误")
     ;
 
     private Integer code;
