@@ -33,6 +33,11 @@ public class UserController {
         UserInfo userInfo = userInfoService.findUserInfoByUsername(data.get("username"));
         try {
             if (userInfo.getPassword().equals(data.get("password"))) {
+                try {
+                    userInfoService.updateVisit(userInfo);
+                } catch (Exception e) {
+                    return ResultVOUtil.error(ResultEnum.UNEXPECTED_ERROR);
+                }
                 Map<String, Integer> userObj = new HashMap<>();
                 userObj.put("user_id", userInfo.getUserId());
                 return ResultVOUtil.success("登陆", userObj);

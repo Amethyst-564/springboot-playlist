@@ -7,4 +7,6 @@ public interface UserInfoService {
     UserInfo findUserInfoByUsername(String username);
 
     UserInfo save(UserInfo userInfo);
+
+    UserInfo updateVisit(UserInfo userInfo);
 }

@@ -3,6 +3,7 @@ package pers.opappo.playlist.dataobject;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 import pers.opappo.playlist.enums.UserStatusEnum;
+import pers.opappo.playlist.enums.UserTypeEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,11 @@ public class UserInfo {
     //用户状态默认0正常
     private Integer userStatus = UserStatusEnum.NORMAL.getCode();
 
+    private Integer userType = UserTypeEnum.NORMAL.getCode();
+
     private Date createTime;
 
-    private Date updateTime;
+    private Date visitedTime;
+
+    private Integer visitedCount;
 }

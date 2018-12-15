@@ -24,4 +24,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     public UserInfo save(UserInfo userInfo) {
         return repository.save(userInfo);
     }
+
+    @Override
+    public UserInfo updateVisit(UserInfo userInfo) {
+        userInfo.setVisitedCount(userInfo.getVisitedCount() + 1);
+
+        return repository.save(userInfo);
+    }
 }
