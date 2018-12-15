@@ -37,5 +37,5 @@ public class UserInfo {
 
     private Date visitedTime;
 
-    private Integer visitedCount;
+    private Integer visitedCount = 0;
 }
