@@ -9,6 +9,9 @@ import lombok.Data;
 @Data
 public class UserDetailVO {
 
+    @JsonProperty("user_id")
+    private Integer id;
+
     @JsonProperty("user_alias")
     private String alias;
 

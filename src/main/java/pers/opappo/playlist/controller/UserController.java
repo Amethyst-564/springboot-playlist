@@ -74,7 +74,7 @@ public class UserController {
             UserDetail userDetail = new UserDetail();
             userDetail.setUserId(userInfo.getUserId());
             userDetail.setUserAlias(username);
-            userDetail.setUserIcon("http://oklij0lk2.bkt.clouddn.com/18-12-15/96151682.jpg");
+            userDetail.setUserIcon("https://ws1.sinaimg.cn/large/5e3b9ebdgy1fy7himz3qaj20dw0dw3yh.jpg");
             userDetail.setUserDescription("快来修改你的个性签名吧~");
             userDetailService.save(userDetail);
         } catch (Exception e) {
@@ -103,11 +103,10 @@ public class UserController {
 
         // 4. 拼装VO对象
         UserDetailVO userDetailVO = new UserDetailVO();
+        userDetailVO.setId(userDetail.getUserId());
         userDetailVO.setAlias(userDetail.getUserAlias());
         userDetailVO.setIcon(userDetail.getUserIcon());
         userDetailVO.setDescription(userDetail.getUserDescription());
-
-
 
         return ResultVOUtil.success("查询用户详情", userDetailVO);
     }
