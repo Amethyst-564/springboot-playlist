@@ -3,7 +3,7 @@ package pers.opappo.playlist.VO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * Created by minghli on 2018/10/16.
@@ -17,12 +17,7 @@ public class PlaylistVO {
     @JsonProperty("pid")
     private String pid;
 
-    @JsonProperty("cover")
-    private String playlistCover;
+    @JsonProperty("detail")
+    private List<PlaylistDetailVO> playlistDetailVOList;
 
-    @JsonProperty("content")
-    private String playlistContent;
-
-    @JsonProperty("time")
-    private Date createTime;
 }

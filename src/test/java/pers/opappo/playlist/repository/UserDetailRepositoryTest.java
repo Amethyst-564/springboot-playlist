@@ -30,7 +30,6 @@ public class UserDetailRepositoryTest {
     @Test
     public void findByUserId() {
         UserDetail result = repository.findByUserId(10);
-        System.out.println(result);
         Assert.assertNotNull(result);
     }
 }

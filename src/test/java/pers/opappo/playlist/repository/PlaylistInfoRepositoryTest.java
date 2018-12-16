@@ -25,8 +25,6 @@ public class PlaylistInfoRepositoryTest {
         playlistInfo.setUserId(1);
         playlistInfo.setPlaylistName("test");
         playlistInfo.setPid("576465");
-        playlistInfo.setPlaylistCover("img");
-        playlistInfo.setPlaylistContent("content");
 
         PlaylistInfo result = repository.save(playlistInfo);
         Assert.assertNotNull(result);

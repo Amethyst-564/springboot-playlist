@@ -7,26 +7,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
- * Created by minghli on 2018/9/30.
+ * Created by minghli on 2018/12/16.
  */
 @Entity
 @Data
 @DynamicUpdate
-public class PlaylistInfo {
+public class PlaylistDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer playlistDetailId;
+
     private Integer playlistId;
 
-    // 用户id
-    private Integer userId;
+    // 封面
+    private String playlistCover;
 
-    // 歌单名
-    private String playlistName;
+    // 详情id
+    private String playlistContent;
 
-    // 网易歌单id
-    private String pid;
-
+    // 添加时间
+    private Date addTime;
 }
