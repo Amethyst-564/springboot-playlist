@@ -73,7 +73,7 @@ public class PlaylistController {
     }
 
     @GetMapping("/list")
-    private ResultVO list(@RequestParam("username") String username) {
+    public ResultVO list(@RequestParam("username") String username) {
 
         // 1 从库中查询用户信息
         UserInfo userInfo = userInfoService.findUserInfoByUsername(username);
@@ -92,6 +92,7 @@ public class PlaylistController {
         List<PlaylistVO> playlistVOList = new ArrayList<>();
         for (PlaylistInfo playlistInfo : playlistInfoList) {
             PlaylistVO playlistVO = new PlaylistVO();
+            playlistVO.setPlaylistId(playlistInfo.getPlaylistId());
             playlistVO.setPlaylistName(playlistInfo.getPlaylistName());
             playlistVO.setPid(playlistInfo.getPid());
 
@@ -102,7 +103,7 @@ public class PlaylistController {
             for (PlaylistDetail playlistDetail : playlistDetailList) {
                 PlaylistDetailVO playlistDetailVO = new PlaylistDetailVO();
                 playlistDetailVO.setPlaylistCover(playlistDetail.getPlaylistCover());
-                playlistDetailVO.setPlaylistContent(playlistDetail.getPlaylistContent());
+                playlistDetailVO.setAddTime(playlistDetail.getAddTime());
 
                 playlistDetailVOList.add(playlistDetailVO);
             }
@@ -113,5 +114,29 @@ public class PlaylistController {
 
 
         return ResultVOUtil.success("查询用户歌单", playlistVOList);
+    }
+
+    @GetMapping("/detail")
+    public ResultVO detail(@RequestParam("playlistId") Integer playlistId) {
+
+        PlaylistInfo playlistInfo = playlistInfoService.findOne(playlistId);
+        List<PlaylistDetail> playlistDetailList = playlistDetailService.findByPlaylistId(playlistId);
+
+        List<PlaylistDetailVO> playlistDetailVOList = new ArrayList<>();
+        for(PlaylistDetail playlistDetail: playlistDetailList) {
+            PlaylistDetailVO playlistDetailVO = new PlaylistDetailVO();
+            playlistDetailVO.setPlaylistCover(playlistDetail.getPlaylistCover());
+            playlistDetailVO.setPlaylistContent(playlistDetail.getPlaylistContent());
+            playlistDetailVO.setAddTime(playlistDetail.getAddTime());
+
+            playlistDetailVOList.add(playlistDetailVO);
+        }
+
+        PlaylistVO playlistVO = new PlaylistVO();
+        playlistVO.setPlaylistName(playlistInfo.getPlaylistName());
+        playlistVO.setPid(playlistInfo.getPid());
+        playlistVO.setPlaylistDetailVOList(playlistDetailVOList);
+
+        return ResultVOUtil.success("查询歌单详情", playlistVO);
     }
 }

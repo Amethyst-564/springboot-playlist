@@ -11,6 +11,9 @@ import java.util.List;
 @Data
 public class PlaylistVO {
 
+    @JsonProperty("playlist_id")
+    private Integer playlistId;
+
     @JsonProperty("name")
     private String playlistName;
 

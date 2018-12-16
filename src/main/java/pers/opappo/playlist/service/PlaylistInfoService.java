@@ -8,6 +8,8 @@ public interface PlaylistInfoService {
 
     PlaylistInfo save(PlaylistInfo playlistInfo);
 
+    PlaylistInfo findOne(Integer playlistId);
+
     List<PlaylistInfo> findByUserId(Integer userId);
 
     PlaylistInfo findByPid(String pid);
