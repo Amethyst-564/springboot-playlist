@@ -3,10 +3,13 @@ package pers.opappo.playlist.service.Impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.opappo.playlist.dataobject.PlaylistDetail;
+import pers.opappo.playlist.enums.ResultEnum;
+import pers.opappo.playlist.exception.PlaylistException;
 import pers.opappo.playlist.repository.PlaylistDetailRepository;
 import pers.opappo.playlist.service.PlaylistDetailService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Created by minghli on 2018/12/16.
@@ -25,5 +28,16 @@ public class PlaylistDetailServiceImpl implements PlaylistDetailService {
     @Override
     public List<PlaylistDetail> findByPlaylistId(Integer playlistId) {
         return repository.findListByPlaylistId(playlistId);
+    }
+
+    @Override
+    public void delete(Integer playlistDetailId) {
+        PlaylistDetail playlistDetail;
+        try {
+            playlistDetail = repository.findById(playlistDetailId).get();
+        } catch (NoSuchElementException e) {
+            throw new PlaylistException(ResultEnum.PLAYLIST_INFO_NOT_EXIST);
+        }
+        repository.delete(playlistDetail);
     }
 }

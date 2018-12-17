@@ -9,4 +9,6 @@ public interface PlaylistDetailService {
     PlaylistDetail save(PlaylistDetail playlistDetail);
 
     List<PlaylistDetail> findByPlaylistId(Integer playlistId);
+
+    void delete(Integer playlistId);
 }

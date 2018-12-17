@@ -11,6 +11,9 @@ import java.util.Date;
 @Data
 public class PlaylistDetailVO {
 
+    @JsonProperty("playlist_detail_id")
+    private Integer playlistDetailId;
+
     @JsonProperty("cover")
     private String playlistCover;
 

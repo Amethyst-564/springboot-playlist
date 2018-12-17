@@ -117,14 +117,15 @@ public class PlaylistController {
     }
 
     @GetMapping("/detail")
-    public ResultVO detail(@RequestParam("playlistId") Integer playlistId) {
+    public ResultVO detail(@RequestParam("id") Integer playlistId) {
 
         PlaylistInfo playlistInfo = playlistInfoService.findOne(playlistId);
         List<PlaylistDetail> playlistDetailList = playlistDetailService.findByPlaylistId(playlistId);
 
         List<PlaylistDetailVO> playlistDetailVOList = new ArrayList<>();
-        for(PlaylistDetail playlistDetail: playlistDetailList) {
+        for (PlaylistDetail playlistDetail : playlistDetailList) {
             PlaylistDetailVO playlistDetailVO = new PlaylistDetailVO();
+            playlistDetailVO.setPlaylistDetailId(playlistDetail.getPlaylistDetailId());
             playlistDetailVO.setPlaylistCover(playlistDetail.getPlaylistCover());
             playlistDetailVO.setPlaylistContent(playlistDetail.getPlaylistContent());
             playlistDetailVO.setAddTime(playlistDetail.getAddTime());
@@ -138,5 +139,18 @@ public class PlaylistController {
         playlistVO.setPlaylistDetailVOList(playlistDetailVOList);
 
         return ResultVOUtil.success("查询歌单详情", playlistVO);
+    }
+
+    @DeleteMapping("/delete_detail")
+    public ResultVO delete(@RequestParam("id") Integer playlistDetailId) {
+
+        try {
+            playlistDetailService.delete(playlistDetailId);
+        } catch (Exception e) {
+            return ResultVOUtil.error(ResultEnum.DELETE_PLAYLIST_DETAIL_FAILED);
+        }
+
+        return ResultVOUtil.success("删除");
+
     }
 }
