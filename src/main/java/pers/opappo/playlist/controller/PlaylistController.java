@@ -38,11 +38,22 @@ public class PlaylistController {
     public ResultVO save(@RequestBody Map<String, String> data) {
 
         try {
+            Boolean pidIsExist = false;
             Integer playlistId = null;
-            // 查询该歌单是否已有
-            PlaylistInfo playlistInfoFromDB = playlistInfoService.findByPid(data.get("pid"));
 
-            if (playlistInfoFromDB == null) {
+            //判断pid是否存在
+            List<PlaylistInfo> playlistInfoList = playlistInfoService.findByUserId(Integer.valueOf(data.get("user_id")));
+            if (playlistInfoList.size() != 0) {
+                for (PlaylistInfo playlistInfo : playlistInfoList) {
+                    if (playlistInfo.getPid().equals(data.get("pid"))) {
+                        pidIsExist = true;
+                        playlistId = playlistInfo.getPlaylistId();
+                        break;
+                    }
+                }
+            }
+
+            if (!pidIsExist) {
                 // 若不存在则写入info表
                 PlaylistInfo playlistInfo = new PlaylistInfo();
                 playlistInfo.setUserId(Integer.valueOf(data.get("user_id")));
@@ -53,9 +64,6 @@ public class PlaylistController {
 
                 // playlistId为新info生成
                 playlistId = playlistInfo.getPlaylistId();
-            } else {
-                // 若已存在则跳过写入info表，playlistId为库中查出
-                playlistId = playlistInfoFromDB.getPlaylistId();
             }
 
             PlaylistDetail playlistDetail = new PlaylistDetail();
