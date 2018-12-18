@@ -26,18 +26,38 @@ public class PlaylistDetailServiceImpl implements PlaylistDetailService {
     }
 
     @Override
+    public PlaylistDetail findOne(Integer playlistDetailId) {
+        PlaylistDetail playlistDetail;
+        try {
+            playlistDetail = repository.findById(playlistDetailId).get();
+        } catch (NoSuchElementException e) {
+            throw new PlaylistException(ResultEnum.PLAYLIST_DETAIL_NOT_EXIST);
+        }
+
+        return playlistDetail;
+    }
+
+    @Override
     public List<PlaylistDetail> findByPlaylistId(Integer playlistId) {
         return repository.findListByPlaylistId(playlistId);
     }
 
     @Override
-    public void delete(Integer playlistDetailId) {
+    public void deleteOne(Integer playlistDetailId) {
         PlaylistDetail playlistDetail;
         try {
             playlistDetail = repository.findById(playlistDetailId).get();
         } catch (NoSuchElementException e) {
-            throw new PlaylistException(ResultEnum.PLAYLIST_INFO_NOT_EXIST);
+            throw new PlaylistException(ResultEnum.PLAYLIST_DETAIL_NOT_EXIST);
         }
         repository.delete(playlistDetail);
+    }
+
+    @Override
+    public void deleteList(Integer playlistId) {
+        List<PlaylistDetail> playlistDetailList = repository.findListByPlaylistId(playlistId);
+        if (playlistDetailList.size() != 0) {
+            repository.deleteAll(playlistDetailList);
+        }
     }
 }

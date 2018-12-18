@@ -8,7 +8,11 @@ public interface PlaylistDetailService {
 
     PlaylistDetail save(PlaylistDetail playlistDetail);
 
+    PlaylistDetail findOne(Integer playlistDetailId);
+
     List<PlaylistDetail> findByPlaylistId(Integer playlistId);
 
-    void delete(Integer playlistId);
+    void deleteOne(Integer playlistDetailId);
+
+    void deleteList(Integer playlistId);
 }

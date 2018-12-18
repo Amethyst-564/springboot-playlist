@@ -13,4 +13,6 @@ public interface PlaylistInfoService {
     List<PlaylistInfo> findByUserId(Integer userId);
 
     PlaylistInfo findByPid(String pid);
+
+    void deleteOne(Integer playlistId);
 }

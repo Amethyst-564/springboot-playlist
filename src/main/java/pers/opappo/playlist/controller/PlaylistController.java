@@ -150,15 +150,33 @@ public class PlaylistController {
     }
 
     @DeleteMapping("/delete_detail")
-    public ResultVO delete(@RequestParam("id") Integer playlistDetailId) {
+    public ResultVO deleteDetail(@RequestParam("id") Integer playlistDetailId) {
 
         try {
-            playlistDetailService.delete(playlistDetailId);
+            Integer playlistIdOfDetail = playlistDetailService.findOne(playlistDetailId).getPlaylistId();
+            playlistDetailService.deleteOne(playlistDetailId);
+
+            // 如果是该playlist info的最后一条detail，则同时删除info记录
+            if (playlistDetailService.findByPlaylistId(playlistIdOfDetail).size() == 0) {
+                playlistInfoService.deleteOne(playlistIdOfDetail);
+            }
         } catch (Exception e) {
             return ResultVOUtil.error(ResultEnum.DELETE_PLAYLIST_DETAIL_FAILED);
         }
 
-        return ResultVOUtil.success("删除");
+        return ResultVOUtil.success("删除歌单详情");
 
+    }
+
+    @DeleteMapping("/delete_info")
+    public ResultVO deleteInfo(@RequestParam("id") Integer playlistId) {
+        try {
+            playlistInfoService.deleteOne(playlistId);
+            playlistDetailService.deleteList(playlistId);
+        } catch (Exception e) {
+            return ResultVOUtil.error(ResultEnum.DELETE_PLAYLIST_INFO_FAILED);
+        }
+
+        return ResultVOUtil.success("删除歌单信息");
     }
 }

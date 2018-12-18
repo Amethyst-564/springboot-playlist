@@ -47,4 +47,11 @@ public class PlaylistInfoServiceImpl implements PlaylistInfoService {
     public PlaylistInfo findByPid(String pid) {
         return repository.findByPid(pid);
     }
+
+    @Override
+    public void deleteOne(Integer playlistId) {
+        PlaylistInfo playlistInfo = findOne(playlistId);
+
+        repository.delete(playlistInfo);
+    }
 }
